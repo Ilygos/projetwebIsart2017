@@ -1,0 +1,168 @@
+/*RESET CSS*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*MON STYLE*/
+
+body{
+	overflow: hidden;
+	text-transform: uppercase;
+	font-weight: bolder;
+}
+
+#playzone{
+	background: url("../ressources/bg.gif") no-repeat bottom center;
+	background-size: cover;
+}
+
+.bar{
+	text-align: center;
+	line-height: 30px;
+	border-radius: 10px;
+}
+
+#lifezone{
+	margin-bottom: 1vh;
+}
+
+.lifebar{
+	background-color: gold;
+	border: solid darkgrey 3px;
+	width: 20%;
+}
+
+.lifebarP1{
+	float: left;
+}
+
+.lifebarP2{
+	float: right;
+}
+
+.clearBoth{
+	clear: both;
+}
+
+.meteorbar{
+	width: 30vw;
+	background-color: orangered;
+}
+
+#meteor-zone{
+	padding-left: 35vw;
+}
+
+#timer{
+
+}
+
+#stage{
+	position: relative;
+	height: 75vh;
+}
+
+#infos{
+	background-color: rgba(0,0,0,0.6);
+	color: white;
+	padding:10px;
+	max-width: 20vw;
+	text-align: justify;
+	margin-left: 40vw;
+}
+
+#cardzone{
+	background-image: url("../ressources/cardzone_bg.png");
+	padding: 5px;
+}
+
+#cardzone>div{
+	display: inline-block;
+	max-width: 50vw;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.player{
+	width: 150px;
+	position: absolute;
+	bottom: 0;
+}
+
+.player1{
+	left: 20vw;
+}
+
+.player2{
+	transform: scaleX(-1);
+	right: 20vw;
+}
+
+#deck{
+
+}
+
+#deck-number{
+	position: relative;
+}
+
+
+.deck-card{
+	height: 270px;
+	width: 187px;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+#hand{
+	padding: 5px;
+}
+
+.hand-card{
+	width: 150px;
+}
+
+#round{
+	text-align: justify;
+}
