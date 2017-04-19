@@ -1,4 +1,3 @@
-console.log("1");
 require.config({
 	paths: {
 		"jquery" : "../lib/jquery-3.1.1.min"
@@ -7,9 +6,7 @@ require.config({
 
 
 
-console.log("2");
 require(["jquery", "Player"], function($, Player){
-	console.log("3");
 	var remainingDeckCards = 100;
 	var cardOffsetX = 150;
 	var cardOffsetY = 25;

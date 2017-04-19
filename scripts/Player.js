@@ -1,20 +1,26 @@
 
 define(['jquery'], function($){
 		Player.prototype.id = 0;
-
+		var that;
+		var urlPhpFile = './Php/fetchHand.php';
 
 		function Player()
 		{
-			Player.instance = this;
+			that = this;
 			init();
 		}
 
 
 		function logged(data){
-			Player.instance.id = data;
+			that.id = data;
 			getHand();
 		}
 
+
+		function failure(jqxhr, textStatus, error)
+		{
+			console.log("doFailed :", jqxhr.status, textStatus, error);
+		}
 
 		function login()
 		{
@@ -24,22 +30,23 @@ define(['jquery'], function($){
 				 url : $("form").prop('action'), // url du script à interroger
 					type : 'post',
 					data : recupFormLogin,
-					success : logged
+					success : logged,
 					error : failure
 			});
 		}
 
-		function parseHand(data)
+		function fetchHand(data)
 		{
-			Player.instance.hand = data;
+			that.hand = data;
+			console.log(that.hand.toString());
 		}
 
 		function getHand()
 		{
 			$.ajax({
 				url : urlPhpFile,
-	            dataType : 'json',
-				success : parseHand,
+	      dataType : 'json',
+				success : fetchHand,
 				error: failure
 			});
 
