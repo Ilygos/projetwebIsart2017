@@ -1,5 +1,5 @@
 
-define(['jquery'], function($){
+define(['jquery', 'Turn'], function($, Turn){
 		Player.prototype.id = 0;
 		var that;
 		var urlPhpFile = './Php/fetchHand.php';
@@ -10,6 +10,10 @@ define(['jquery'], function($){
 			init();
 		}
 
+		function Play()
+		{
+			var turn = new Turn();
+		}
 
 		function logged(data){
 			that.id = data;
