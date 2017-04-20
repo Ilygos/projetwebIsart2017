@@ -1,0 +1,252 @@
+* {box-sizing: border-box;}
+html, body{
+    height: 100%;
+}
+body {
+    font-size: 12px;
+    margin:0;
+    padding: 0;
+    background-color:black;
+    overflow:hidden;
+}
+
+#stage{
+     /* comportement visuel de cellule */
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex; /* contexte sur le parent */
+  flex-direction: column; /* direction d'affichage verticale */
+  justify-content: center; /* alignement vertical */
+}
+
+#container{
+    overflow:hidden;
+    position: relative;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    max-width:1570px;
+    max-height:1064px;
+}
+
+/* ---- HUD ------------------------------------------------------------------ */
+/* ---- HUD TOP -------------------------------------------------------------- */
+#hudTop {
+    position: absolute;
+    top:0;
+    left :0;
+    right :0;
+    height: 100px;
+    /*background-color: aqua;*/
+    /* -- z-index gère la profondeur des éléments positionnés -- */
+    /* -- comme gamePlane est positionné en relative et est déclaré plus bas dans la page html, il passe devant le HUD, donc z-inxex super élevé sur HUD pour contre-balancer*/
+    z-index : 5000;
+    
+}
+#hudPlayer1, #hudPlayer2{
+    position: absolute;
+    font-weight: bold;
+    font-size: 2em;
+    color: aliceblue;
+    width: 50%;
+    height: 100%;
+    left: 0;
+}
+#hudPlayer1{
+    font-weight: bold;
+    /*background-color:beige;*/
+}
+
+#hudPlayer2{
+    left: 50%;
+    text-align: right;
+    /*background-color:aquamarine;*/
+}
+
+#lifeBarPlayer1, #lifeBarPlayer2, .playerName {
+    display: block;
+    position: absolute;
+    left: 20px;
+    right : 20px;
+}
+
+.playerName {
+    top : 20px;
+}
+
+#lifeBarPlayer1, #lifeBarPlayer2 {
+    top : 50px;
+    height : 50px;
+}
+
+.lifeBarMask {
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.lifeBar {
+    width: 100%;
+    height:50px;
+    background-color: aqua;
+}
+
+/* ---- HUD BOTTOM -------------------------------------------------------------- */
+#hudBottom {
+    position: absolute;
+    bottom:0;
+    left :0;
+    right :0;
+    /*height: 150px;
+    background-color: blue;*/
+}
+
+#hand, #deck{
+    position:absolute;
+    left : 0;
+    bottom: 0;
+    width: 50%;
+    padding: 5%;
+    /*height: 150px;
+    background-color: red;*/
+}
+
+#deck{
+    left:50%;
+    /*background-color:maroon;*/
+}
+
+#hand .hand_card, #deck .card{
+    position: absolute;
+    bottom : 20%;
+    left : 70%;
+   
+}
+
+#hand .hand_card:nth-child(2){
+    text-align: center;
+    
+    left : 90%;
+}
+
+#hand .hand_card:nth-child(3){
+    
+    left : 110%;
+}
+
+#deck .card {
+    left : auto;
+    right : 10%;
+}
+
+/* ---- GAME SCREEN -------------------------------------------------------------- */
+#gamePlane{
+    position: relative;
+    background:url("../ressources/bg.gif") no-repeat bottom center;
+    background-size: cover;    
+    width: 100%;
+    height: 100%;
+    /* au lieu de z-index: 5000 sur HUD, on peut mettre un z-index négatif sur gamePlane z-index:-1; */
+}
+#ground {
+    position : absolute;
+    left : 0;
+    right : 0;
+    bottom:175px;
+    /*height: 10px;
+    background-color: aqua;*/
+}
+#groundLeft, #groundRight {
+    position : absolute;
+    left : 0;
+    width : 20%;
+   /* height: 10px;
+    background-color: red;*/
+}
+
+#groundRight {
+    left : 10%;
+    height: 100%;
+    background-color: blue;
+}
+
+/* ---- PLAYER ---- */
+#player1, #player2 {
+    position: absolute;
+    bottom:0;
+    /*transform: translateY(-1);*/
+    width : 432px;
+    height: 342px;
+}
+
+#player1 {
+    left:50%;
+}
+
+#player2 {
+    right:50%;
+    transform: scaleX(-1);
+}
+
+/* ---- PLAYER ANIMATION -------------------------------------------------------------- */
+#player1.idle, #player2.idle{
+  background: url('../ressources/player1_idle.png') left center;
+  animation: idle 0.5s steps(7) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
+}
+
+#player2.idle{
+  background: url('../ressources/player2_idle.png') left center;
+}
+
+.slash_high, .slash_middle, .slash_low{
+	animation: slash_high 0.975s steps(16) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
+}
+
+#player1.slash_high{
+	background: url('../ressources/player1_slash_high.png') left center;
+}
+#player1.slash_middle{
+	background: url('../ressources/player1_slash_middle.png') left center;
+}
+#player1.slash_low{
+	background: url('../ressources/player1_slash_low.png') left center;
+}
+
+#player1.runCycle{
+	background: url('../ressources/player1_run_cycle.png') left center;
+}
+
+#player1.runCycle{
+	background: url('../ressources/player1_run_cycle.png') left center;
+    animation: runCycle 0.6s steps(8) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
+}
+
+#player1.runEnd{
+	background: url('../ressources/player1_run_end.png') left center;
+}
+
+@keyframes idle {
+    0% { background-position: 0; }
+    100% { background-position: -3024px; }
+}
+
+@keyframes slash_high {
+    0% { background-position: 0; }
+    100% { background-position: -6912px; }
+}
+
+@keyframes slash_low {
+    0% { background-position: 0; }
+    100% { background-position: -6912px; }
+}
+
+@keyframes slash_middle {
+    0% { background-position: 0; }
+    100% { background-position: -6912px; }
+}
+
+@keyframes runCycle {
+    0% { background-position: 0; }
+    100% { background-position: -3456px; }
+}

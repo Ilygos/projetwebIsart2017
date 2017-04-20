@@ -1,50 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Isart Digital - PGDP - Projet Web 2017">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Isart Digital - PGDP - Projet Web 2017</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico" type="ressources/x-icon">
+	<link rel="icon" href="favicon.png" type="ressources/png">
+	<link rel="icon" sizes="32x32" href="ressources/favicon/favicon-32.png" type="image/png">
+	<link rel="icon" sizes="64x64" href="ressources/favicon/favicon-64.png" type="image/png">
+	<link rel="icon" sizes="96x96" href="ressources/favicon/favicon-96.png" type="image/png">
+	<link rel="icon" sizes="196x196" href="ressources/favicon/favicon-196.png" type="image/png">
+	<link rel="apple-touch-icon" sizes="152x152" href="ressources/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="ressources/favicon/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="ressources/favicon/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="ressources/favicon/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="ressources/favicon/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="ressources/favicon/apple-touch-icon-144x144.png">
+	<meta name="msapplication-config" content="ressources/favicon/IEconfig.xml" />
+	<meta name="msapplication-TileImage" content="ressources/favicon/favicon-144.png">
+	<meta name="msapplication-TileColor" content="#FFFFFF">
 </head>
 <body>
-	<div id="playzone">
-		<div id="lifezone">
-			<div class="lifebar lifebarP1 bar">
-				LifeBar Player 1
-			</div>
-			<div class="lifebar lifebarP2 bar">
-				LifeBar Player 2
-			</div>
-			<div class="clearBoth"></div>
-		</div>
-		<div id="meteor-zone">
-			<div class="bar meteorbar">
-				<p id="timer">Timer</p>
-			</div>
-		</div>
-		<div id="stage">
-			<div id="infos">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita atque aliquid eligendi totam, explicabo numquam impedit id omnis! Unde placeat amet deleniti possimus neque aperiam quae optio perferendis consequatur dolorem.</div>
-			<img src="ressources/test_perso.png" alt="Test Perso1" class="player player1">
-			<img src="ressources/test_perso.png" alt="Test Perso2" class="player player2">
-		</div>
-	</div>
-	<div id="cardzone">
-		<div id="hand">
-			<img src="ressources/card_play.png" alt="Carte en main" class="hand-card">
-			<img src="ressources/card_play.png" alt="Carte en main" class="hand-card">
-			<img src="ressources/card_play.png" alt="Carte en main" class="hand-card">
-		</div>
-		<div id="round">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque quibusdam aut reprehenderit itaque ea, nulla debitis voluptatem, quia non est qui. Odio accusantium voluptate libero at quam explicabo, dolorum mollitia.</p>
-		</div>
-		<div id="deck">
-			<p id="deck-number"></p>
-		</div>
-	</div>
-
-	<script data-main="scripts/main" src="lib/require.js"></script>
-   	<script src="lib/jquery-3.1.1.min.js"></script>
+    <div id="stage">
+        <div id="container">
+            <div id="hudTop">
+                <div id="hudPlayer1">
+                    <span class="playerName">Masamune</span>
+                    <div id="lifeBarPlayer1">
+                        <div class="lifeBarMask">
+                            <div class="lifeBar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="hudPlayer2">
+                    <span class="playerName">Nemusama</span>
+                    <div id="lifeBarPlayer1">
+                        <div class="lifeBarMask">
+                            <div class="lifeBar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="gamePlane">
+                <div id="ground">
+                    <div id="groundLeft">
+                        <div id="player1"></div>
+                    </div>
+                    <div id="groundRight">
+                        <div id="player2"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="hudBottom">
+                <div id="hand">
+                    <img class="hand_card" src="ressources/card_back.png">
+                    <img class="hand_card" src="ressources/card_back.png">
+                    <img class="hand_card" src="ressources/card_back.png">
+                </div>
+                <div id="deck"><img class="card" src="ressources/card_back.png"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
 </body>
 </html>
