@@ -1,11 +1,6 @@
 <?php
     // va aller dans la base, chercher le nom du player, renvoyer le score et autres infos, tout ce qui est en base...
-    try
-    {
-      $bdd = new PDO('mysql:host=localhost;dbname=Projet;charset=utf8', 'root', 'mysql');
-    } catch (Exception $e) {
-      die('Erreur :'.$e->getMessage());
-    }
+    include 'connexion.php';
     $login = $_POST["firstName"];
     $password = $_POST["lastName"];
     $ID_Raw = $bdd->prepare("SELECT ID_Player FROM Players WHERE Login= '".$login."' AND Password= '".$password."' ");

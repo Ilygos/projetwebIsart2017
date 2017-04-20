@@ -4,12 +4,11 @@
 
 <html>
   <script data-main="./scripts/Main" src="./lib/require.js"></script>
-  <h1>JSON</h1>
-    <p>Ouvrir la console de debug</p>
     <div id="grid">
+      <h1 style="text-align: center;">Titre Ici !</h1>
         <form action="./Php/sendID.php" method="post">
-            First name: <input type="text" name="firstName"><br>
-            Last name: <input type="text" name="lastName"><br>
+            Login &nbsp &nbsp&nbsp&nbsp: <input type="text" name="firstName"><br>
+            Password: <input type="text" name="lastName"><br>
             <input type="submit" value="Submit">
         </form>
     </div>

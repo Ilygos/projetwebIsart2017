@@ -13,6 +13,8 @@ define(['jquery'], function($){
 
 		function logged(data){
 			that.id = data;
+			$('#grid').empty();
+			console.log(that.id);
 			getHand();
 		}
 
@@ -43,6 +45,7 @@ define(['jquery'], function($){
 
 		function getHand()
 		{
+			urlPhpFile += "?ID="+that.id;
 			$.ajax({
 				url : urlPhpFile,
 	      dataType : 'json',
