@@ -1,15 +1,23 @@
-//define(['jquery', 'jqueryUI']), function($, $){
-    setInterval(function(){ 
-       /* $('.hand_card').draggable({
+/*define(['jquery-ui'], function() {
+    $('div').addClass('white');
+});*/
+
+define(['jqueryUI'], function(){
+    var id;
+    function card()
+    {
+        id = setInterval(function(){ 
+        $('.hand_card').draggable({
         revert: true,
         containment : 'window',
         })
-    },*/
-        alert("Hello"); },1000);
+     });
+    }
+    
     
 
-	//	return card;
-//});
-//console.log("hey");
+		return card;
+});
+console.log("hey");
 
 
