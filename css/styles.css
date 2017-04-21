@@ -31,6 +31,8 @@ body {
     max-height:1064px;
 }
 
+
+
 /* ---- HUD ------------------------------------------------------------------ */
 /* ---- HUD TOP -------------------------------------------------------------- */
 #hudTop {
@@ -125,20 +127,21 @@ body {
 }
 
 #hand .hand_card:nth-child(2){
-    text-align: center;
     
     left : 90%;
 }
 
 #hand .hand_card:nth-child(3){
-    
     left : 110%;
 }
 
 #deck .card {
     left : auto;
-    right : 10%;
+    right : 80%;
 }
+
+
+
 
 /* ---- GAME SCREEN -------------------------------------------------------------- */
 #gamePlane{

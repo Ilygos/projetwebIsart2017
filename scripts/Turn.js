@@ -1,4 +1,4 @@
-define(['jquery', 'Player'], function($, Player){
+/*define(['jquery', 'Player'], function($, Player){
     var urlPhpFile = "../Php/fetchTurn.php";
 
 
@@ -82,3 +82,4 @@ define(['jquery', 'Player'], function($, Player){
 
 		return Turn;
 });
+*/
