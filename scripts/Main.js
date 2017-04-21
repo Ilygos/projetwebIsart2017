@@ -11,7 +11,7 @@ require(["jquery", "Player"], function($, Player){
 	var cardOffsetX = 150;
 	var cardOffsetY = 25;
 	var player;
-    
+    var behaviorCard;
 
 
 	function renderDeck(){
@@ -35,6 +35,7 @@ require(["jquery", "Player"], function($, Player){
 
 	function init()
 	{
+        behaviorCard = new card();
 		player = new Player();
 		renderDeck();
 	}

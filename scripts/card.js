@@ -1,13 +1,23 @@
-define(['jquery', 'jqueryUI'], function($, $){
+/*define(['jquery-ui'], function() {
+    $('div').addClass('white');
+});*/
+
+define(['jqueryUI'], function(){
+    var id;
+    function card()
+    {
+        id = setInterval(function(){ 
+        $('.hand_card').draggable({
+        revert: true,
+        containment : 'window',
+        })
+     });
+    }
     
-    $('.hand_card').draggable({
-    revert: true,
-    containment : 'window',
-    console.log("hey")
-    });
+    
 
 		return card;
 });
-
-
 console.log("hey");
+
+
