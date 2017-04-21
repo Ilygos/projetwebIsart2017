@@ -3,6 +3,8 @@ session_start();
 
 $TYPES = ["High","Low","Mid"];
 
+
+
 function checkCards()
 {
     var $p1CardType = $_SESSION["Turn"][0]["Type"];
