@@ -1,13 +1,15 @@
-define(['jquery', 'jqueryUI'], function($, $){
+//define(['jquery', 'jqueryUI']), function($, $){
+    setInterval(function(){ 
+       /* $('.hand_card').draggable({
+        revert: true,
+        containment : 'window',
+        })
+    },*/
+        alert("Hello"); },1000);
     
-    $('.hand_card').draggable({
-    revert: true,
-    containment : 'window',
-    console.log("hey")
-    });
 
-		return card;
-});
+	//	return card;
+//});
+//console.log("hey");
 
 
-console.log("hey");
