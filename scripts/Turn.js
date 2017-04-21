@@ -1,82 +1,90 @@
 define(['jquery', 'Player'], function($, Player){
     var urlPhpFile = "../Php/fetchTurn.php";
 
-
     function Turn()
     {
-      turn.that = this;
-      init();
+        turn.that = this;
+        init();
     }
 
 
     function fetchTurn(data)
     {
-      turn.that.infos = data;
+        turn.that.infos = data;
     }
 
 
     function failure(jqxhr, textStatus, error)
 		{
-			console.log("doFailed :", jqxhr.status, textStatus, error);
+  			console.log("doFailed :", jqxhr.status, textStatus, error);
 		}
 
 
     function core()
     {
-      if(turn.that.infos["HasResolved"])
-        fetchCardPlayed();
-      else
+        if(turn.that.infos["HasResolved"])
+          fetchCardPlayed();
+        else
     }
 
 
     function checkCards()
     {
-      var p1CardType = Trun.that.cardInfo[0]["Type"];
-      var p2CardType = Trun.that.cardInfo[1]["Type"];
-      if ( == )
+        var p1CardType = Trun.that.cardInfo[0]["Type"];
+        var p2CardType = Trun.that.cardInfo[1]["Type"];
+        if ( TYPES.indexOf(p1CardType) == TYPES.indexOf(p1CardType))
+          meteor();
+        else if(TYPES.indexOf(p1CardType) == 0 && TYPES.indexOf(p2CardType) == TYPES.length-1)
+          playerHurt(1);
+        else if(TYPES.indexOf(p2CardType) == 0 && TYPES.indexOf(p1CardType) == TYPES.length-1)
+          playerHurt(2);
+        else if(TYPES.indexOf(p1CardType) > TYPES.indexOf(p2CardType))
+          playerHurt(1);
+        else if (TYPES.indexOf(p1CardType) < TYPES.indexOf(p2CardType))
+          playerHurt(2);
     }
-    
+
 
     function showResolve();
     {
-      checkCards();
-      if (!meteor) playTurn();
-      else playMeteor();
+        checkCards();
+        if (!meteor) playTurn();
+        else playMeteor();
     }
 
 
     function fetchCardPlayed()
     {
-      var cardsId = {player1Card:turn.that.infos["Player1CardID"], player2Card:turn.that.infos["Player2CardID"]};
-      $.ajax({
-        url : "../Php/fetchCardPlayed.php"
-        type : 'post',
-        data : cardsId,
-        dataType: 'json',
-        success : function(data)
-        {
-          turn.that.cardInfo = data;
-          showResolve();
-        },
-        error : failure
-      });
+        var cardsId = {player1Card:turn.that.infos["Player1CardID"], player2Card:turn.that.infos["Player2CardID"]};
+        $.ajax({
+          url : "../Php/fetchCardPlayed.php"
+          type : 'post',
+          data : cardsId,
+          dataType: 'json',
+          success : function(data)
+          {
+            turn.that.cardInfo = data;
+            showResolve();
+          },
+          error : failure
+        });
     }
 
 
     function playTurn()
     {
-      alert("Your turn !");
+        alert("Your turn !");
     }
 
 
     function init()
     {
-      $.ajax({
-				url : urlPhpFile,
-	      dataType : 'json',
-				success : fetchTurn,
-				error: failure
-			});
+        $.ajax({
+  				url : urlPhpFile,
+  	      dataType : 'json',
+  				success : fetchTurn,
+  				error: failure
+  			});
     }
 
 

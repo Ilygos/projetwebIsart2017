@@ -1,4 +1,6 @@
 <?php
+session_start();
+
     // va aller dans la base, chercher le nom du player, renvoyer le score et autres infos, tout ce qui est en base...
     include 'connexion.php';
     $login = $_POST["firstName"];
