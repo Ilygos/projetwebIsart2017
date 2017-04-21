@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $Player1Card = $_POST["Player1CardID"];
 $Player2Card = $_POST["Player2CardID"];
 

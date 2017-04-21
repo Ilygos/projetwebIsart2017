@@ -1,4 +1,6 @@
 <?php
+session_start();
+
   include 'connexion.php';
   $PlayerID = $_GET["ID"];
   $Data_Raw = $bdd->prepare("SELECT * FROM Deck INNER JOIN Hand ON Deck.ID_Card = Hand.ID_Card WHERE Hand.ID_Player=".$PlayerID);

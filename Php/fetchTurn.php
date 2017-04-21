@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include 'connexion.php';
 
 $Data_Raw = $bdd->prepare("SELECT * FROM Turn ORDER BY Id_Turn DESC");
