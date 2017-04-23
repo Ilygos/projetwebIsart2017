@@ -1,12 +1,20 @@
 require.config({
 	paths: {
-		"jquery" : "../lib/jquery-3.1.1.min"
-	}
+		"jquery" : "../lib/jquery-3.1.1.min",
+		"jqueryUI" : "../lib/jquery-ui.min"
+	},
+
+	shim: {
+        "jquery-ui": {
+            exports: "Ui",
+            deps: ['jquery']
+        }
+    }
 });
 
 
 
-require(["jquery", "Player"], function($, Player){
+require(["jquery", "Player", "card", "jqueryUI"], function($, Player, card, Ui){
 	var remainingDeckCards = 100;
 	var cardOffsetX = 150;
 	var cardOffsetY = 25;
@@ -35,7 +43,6 @@ require(["jquery", "Player"], function($, Player){
 
 	function init()
 	{
-        behaviorCard = new card();
 		player = new Player();
 		renderDeck();
 	}
