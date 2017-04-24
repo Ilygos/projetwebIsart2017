@@ -244,39 +244,108 @@ body {
 
 /* ---- PLAYER ANIMATION -------------------------------------------------------------- */
 #player1.idle, #player2.idle{
-  background: url('../ressources/player1_idle.png') left center;
+  background: url('../ressources/animation/player1_idle.png') left center;
   animation: idle 0.5s steps(7) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 
-#player2.idle{
-  background: url('../ressources/player2_idle.png') left center;
-}
+/*///////////////////////////Animation du player 1///////////////////////////////////////*/
 
 .slash_high, .slash_middle, .slash_low{
 	animation: slash_high 0.975s steps(16) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 
 #player1.slash_high{
-	background: url('../ressources/player1_slash_high.png') left center;
+	background: url('../ressources/animation/player1_slash_high.png') left center;
 }
 #player1.slash_middle{
-	background: url('../ressources/player1_slash_middle.png') left center;
+	background: url('../ressources/animation/player1_slash_middle.png') left center;
 }
 #player1.slash_low{
-	background: url('../ressources/player1_slash_low.png') left center;
+	background: url('../ressources/animation/player1_slash_low.png') left center;
 }
 
-#player1.runCycle{
-	background: url('../ressources/player1_run_cycle.png') left center;
+#player1.gard_hight{
+	background: url('../ressources/animation/player1_Gard_Hight.png') left center;
 }
 
+#player1.gard_low{
+	background: url('../ressources/animation/player1_Gard_Low.png') left center;
+}
+
+#player1.death_front{
+	background: url('../ressources/animation/player1_Death_Front.png') left center;
+}
+
+#player1.death_back{
+	background: url('../ressources/animation/player1_Death_Back.png') left center;
+}
+
+#player1.hit_high{
+	background: url('../ressources/animation/player1_Hit_High_Low.png') left center;
+}
+
+#player1.hit_middle{
+	background: url('../ressources/animation/player1_Hit_Middle.png') left center;
+}
+
+
 #player1.runCycle{
-	background: url('../ressources/player1_run_cycle.png') left center;
+	background: url('../ressources/animation/player1_run_cycle.png') left center;
     animation: runCycle 0.6s steps(8) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 
+
 #player1.runEnd{
-	background: url('../ressources/player1_run_end.png') left center;
+	background: url('../ressources/animation/player1_run_end.png') left center;
+}
+
+
+
+/*///////////////////////////Animation du player 2///////////////////////////////////////*/
+
+#player2.idle{
+  background: url('../ressources/animation/player2_idle.png') left center;
+}
+
+#player2.slash_high{
+	background: url('../ressources/animation/player2_Slash_High.png') left center;
+}
+#player2.slash_middle{
+	background: url('../ressources/animation/player2_Slash_Middle.png') left center;
+}
+#player2.slash_low{
+	background: url('../ressources/animation/player2_Slash_Low.png') left center;
+}
+
+
+#player2.gard_hight{
+	background: url('../ressources/animation/player2_Gard_High.png') left center;
+}
+
+#player2.gard_low{
+	background: url('../ressources/animation/player2_Gard_Low.png') left center;
+}
+
+#player2.death_front{
+	background: url('../ressources/animation/player2_Death_Front.png') left center;
+}
+
+#player2.death_back{
+	background: url('../ressources/animation/player2_Death_Back.png') left center;
+}
+
+#player2.hit_high{
+	background: url('../ressources/animation/player2_Hit_High_Low.png') left center;
+}
+
+#player2.hit_middle{
+	background: url('../ressources/animation/player2_Hit_Middle.png') left center;
+}
+
+
+#player2.runCycle{
+	background: url('../ressources/animation/player2_run_cycle.png') right center;
+    animation: runCycle 0.6s steps(8) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 
 @keyframes idle {
