@@ -228,35 +228,29 @@ body {
     position : absolute;
     left : 0;
     width : 50%;
-    
+
    /* background-color: red;*/
 }
 
 #groundRight {
     left : 50%;
-    
-    
+
+
 }
 
 /* ---- PLAYER ---- */
 #player1, #player2 {
-    
+
     position: absolute;
-<<<<<<< HEAD
-    bottom:-25%;
-    /*transform: translateY(-1);*/
-=======
-  
->>>>>>> f9ff483c675e3b645771f8f97de1c43ec9952858
     width : 432px;
     height: 342px;
 }
 
 #player1 {
-    
+
     left:50%;
-    
-    
+
+
 }
 
 #player2 {
