@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 26 Avril 2017 à 14:09
+-- Généré le :  Mer 26 Avril 2017 à 14:15
 -- Version du serveur :  5.6.31
 -- Version de PHP :  5.5.38
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `Projet`
 --
+CREATE DATABASE IF NOT EXISTS `Projet` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `Projet`;
 
 -- --------------------------------------------------------
 
