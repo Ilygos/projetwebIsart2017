@@ -48,8 +48,8 @@ function endIntroSequence(){
     player2.animate({"right":'50%'}, 400, 'easeOutSine', nextAnim);
     
     
-    player1.on("webkitAnimationIteration", repeatAnim);
-    player1.on("animationiteration", repeatAnim);
+    /*player1.on("webkitAnimationIteration", repeatAnim);
+    player1.on("animationiteration", repeatAnim);*/
     
   
 }
