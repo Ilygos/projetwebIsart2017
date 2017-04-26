@@ -6,7 +6,7 @@ require.config({
 
 	shim: {
         "jquery-ui": {
-            exports: "Ui",
+            exports: "UI",
             deps: ['jquery']
         }
     }
@@ -14,38 +14,16 @@ require.config({
 
 
 
-require(["jquery", "Player", "card", "jqueryUI"], function($, Player, card, Ui){
-	var remainingDeckCards = 100;
-	var cardOffsetX = 150;
-	var cardOffsetY = 25;
-	var player;
-    var behaviorCard;
-
-
-	function renderDeck(){
-		var card;
-
-		for (var i = 0; i < remainingDeckCards; i++)
-		{
-			var cardX;
-			var cardY;
-			card = $('<img src="ressources/cards.png" alt="Dos de carte du deck" class="card">');
-			cardX = cardOffsetX - 0.2*i;
-			cardY = cardOffsetY + 0.05*i;
-			$(card).css({
-				'right': cardX+'px',
-				'bottom': cardY+'px'
-			})
-			$("#deck").append(card);
-		}}
-
+require(["jquery", "GameManager", "TitleCard" ], function($, GameManager, TitleCard){
 
 
 	function init()
 	{
-		player = new Player();
-		renderDeck();
+		var titleCard = new TitleCard();
+		titleCard.init();
 	}
+
+
 	$(document).ready(init);
 
 

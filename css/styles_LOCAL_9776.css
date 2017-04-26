@@ -199,13 +199,39 @@ body {
 }
 
 
+/*draggable*/
 
+/*.dropper {
+    margin: 50px 10px 10px 50px;
+    width: 400px;
+    height: 250px;
+    background-color: #555;
+    border: 1px solid #111;
+
+    border-radius: 10px;
+    transition: all 200ms linear;
+}*/
 
 .drop_hover {
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.8) inset;
 }
 
+/*.draggable {
+    display: inline-block;
+    margin: 20px 10px 10px 20px;
+    padding-top: 20px;
+    width: 80px;
+    height: 60px;
+    color: #3D110F;
+    background-color: #822520;
+    border: 4px solid #3D110F;
+    text-align: center;
+    font-size: 2em;
+    cursor: move;
 
+    transition: all 200ms linear;
+    user-select: none;
+}*/
 
 /* ---- GAME SCREEN -------------------------------------------------------------- */
 #gamePlane{
@@ -216,11 +242,7 @@ body {
     position : absolute;
     left : 0;
     right : 0;
-<<<<<<< HEAD
     bottom:150px;
-=======
-    bottom:325px;
->>>>>>> f9ff483c675e3b645771f8f97de1c43ec9952858
     /*height: 10px;
     background-color: aqua;*/
 }
@@ -228,39 +250,31 @@ body {
     position : absolute;
     left : 0;
     width : 50%;
-    
-   /* background-color: red;*/
+   /* height: 10px;
+    */background-color: red;
 }
 
 #groundRight {
-    left : 50%;
-    
-    
+    left : 10%;
+    height: 100%;
+    background-color: blue;
 }
 
 /* ---- PLAYER ---- */
 #player1, #player2 {
-    
     position: absolute;
-<<<<<<< HEAD
     bottom:-25%;
     /*transform: translateY(-1);*/
-=======
-  
->>>>>>> f9ff483c675e3b645771f8f97de1c43ec9952858
     width : 432px;
     height: 342px;
 }
 
 #player1 {
-    
-    left:50%;
-    
-    
+    left:25%;
 }
 
 #player2 {
-    right:50%;
+    right:25%;
     transform: scaleX(-1);
 }
 
@@ -313,7 +327,7 @@ body {
 
 #player1.runCycle{
 	background: url('../ressources/animation/player1_run_cycle.png') left center;
-    animation: runCycle 0.5s steps(8) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
+    animation: runCycle 0.6s steps(8) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 
 
@@ -367,7 +381,7 @@ body {
 
 #player2.runCycle{
 	background: url('../ressources/animation/player2_run_cycle.png') right center;
-    animation: runCycle 0.5s steps(8) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
+    animation: runCycle 0.6s steps(8) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 
 @keyframes idle {

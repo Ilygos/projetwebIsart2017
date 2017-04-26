@@ -1,13 +1,13 @@
 
-define(['jquery', 'Turn'], function($, Turn){
+define(['jquery', 'Turn', 'GameManager'], function($, Turn, GameManager){
 		Player.prototype.id = 0;
+		Player.data = [];
 		var that;
 		var urlPhpFile = './Php/fetchHand.php';
 
 		function Player()
 		{
 			that = this;
-			init();
 		}
 
 		function Play()
@@ -15,30 +15,12 @@ define(['jquery', 'Turn'], function($, Turn){
 			var turn = new Turn();
 		}
 
-		function logged(data){
-			that.id = data;
-			$('#grid').empty();
-			console.log(that.id);
-			getHand();
-		}
+
 
 
 		function failure(jqxhr, textStatus, error)
 		{
 			console.log("doFailed :", jqxhr.status, textStatus, error);
-		}
-
-		function login()
-		{
-			var recupFormLogin = {firstName:$("input[name='firstName']").val(), lastName:$("input[name='lastName']").val()};
-
-			$.ajax({
-				 url : $("form").prop('action'), // url du script à interroger
-					type : 'post',
-					data : recupFormLogin,
-					success : logged,
-					error : failure
-			});
 		}
 
 		function fetchHand(data)
@@ -47,7 +29,7 @@ define(['jquery', 'Turn'], function($, Turn){
 			console.log(that.hand.toString());
 		}
 
-		function getHand()
+		Player.prototype.getHand = function()
 		{
 			urlPhpFile += "?ID="+that.id;
 			$.ajax({
@@ -58,22 +40,6 @@ define(['jquery', 'Turn'], function($, Turn){
 			});
 
 		}
-
-
-
-		function init()
-		{
-			// Prevent form submission
-			$("form").submit(function(pEvent) {
-				pEvent.preventDefault();
-			});
-
-			$("input[type='submit']").on('click', function() {
-					$(this).off();
-					login();
-			});
-		}
-
 
 		return Player;
 });

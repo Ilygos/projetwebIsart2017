@@ -16,42 +16,6 @@ body {
     overflow:hidden;
 }
 
-#grid{
-  color: aquamarine;
-  text-align: center;
-  align-content: center;
-  vertical-align: middle;
-  justify-content: center; /* alignement vertical */
-
-}
-
-#grid #formContainer{
-  margin: 0 auto;
-  width: 50%;
-  height: 720px;
-  background: url("../ressources/acceuil_bg.gif") no-repeat center;
-  -moz-border-radius:px;
-  -webkit-border-radius:px;
-  border-radius:px;
-  border: 10px outset #656565;
-}
-
-#grid form{
-  margin: 0 auto;
-  font-size: 48px;
-  font-family: Yozakura;
-  width: 50%;
-  -webkit-border-radius: 0 25px;
-  border-radius: 0 25px;
-  background: -moz-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%, rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(40,29,29,1) 91%, rgba(17,11,11,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(40,29,29,1) 91%,rgba(17,11,11,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(40,29,29,1) 91%,rgba(17,11,11,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-}
-
-#grid form button{
-  background-color: cyan;
-}
-
 #stage{
      /* comportement visuel de cellule */
     vertical-align: middle;
@@ -216,11 +180,7 @@ body {
     position : absolute;
     left : 0;
     right : 0;
-<<<<<<< HEAD
-    bottom:150px;
-=======
     bottom:325px;
->>>>>>> f9ff483c675e3b645771f8f97de1c43ec9952858
     /*height: 10px;
     background-color: aqua;*/
 }
@@ -242,12 +202,7 @@ body {
 #player1, #player2 {
     
     position: absolute;
-<<<<<<< HEAD
-    bottom:-25%;
-    /*transform: translateY(-1);*/
-=======
   
->>>>>>> f9ff483c675e3b645771f8f97de1c43ec9952858
     width : 432px;
     height: 342px;
 }
