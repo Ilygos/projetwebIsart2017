@@ -2,12 +2,12 @@ define(["jquery", "Player", "card", "GameManager" ,"jqueryUI"], function($, Play
   var id;
   var that;
 
-    TitleCard.prototype.display = $(`<h1 style="text-align: center;">Titre Ici !</h1>
+    TitleCard.prototype.display = $(`<img class="logo" src="ressources/logo.png">
       <div id="formContainer">
       </div>
         <form action="./Php/sendID.php" method="post" id="loginForm">
-            Login &nbsp &nbsp&nbsp&nbsp: <input type="text" name="firstName"><br>
-            Password: <input type="text" name="lastName"><br>
+            Login &nbsp &nbsp&nbsp&nbsp: <input type="text" name="login"><br>
+            Password: <input type="text" name="password"><br>
             <input type="submit" value="Submit">
         </form>`);
 
@@ -15,7 +15,6 @@ define(["jquery", "Player", "card", "GameManager" ,"jqueryUI"], function($, Play
     {
         that = this;
         this.player = new Player();
-        init();
     }
 
     function destroy()
@@ -24,14 +23,11 @@ define(["jquery", "Player", "card", "GameManager" ,"jqueryUI"], function($, Play
     }
 
     function logged(data){
-			console.log(data);
 
-				that.data = data;
+				Player.prototype.data = data;
         that.player.getHand();
-        var gm = new GameManager();
-				$("#stage").append(gm.display);
+        Player.prototype.gm = new GameManager();
         destroy();
-			//}
 		}
 
     function failure(jqxhr, textStatus, error)
@@ -41,13 +37,13 @@ define(["jquery", "Player", "card", "GameManager" ,"jqueryUI"], function($, Play
 
     function login()
 		{
-			var recupFormLogin = {login:$("input[name='login']").val(), password:$("input[name='password']").val()};
+			var recupFormLogin = {'login':$("input[name='login']").val(), 'password':$("input[name='password']").val()};
 
 			$.ajax({
 				 url : $("form").prop('action'), // url du script à interroger
 					type : 'post',
 					data : recupFormLogin,
-          dataType : 'json',
+          dataType: 'json',
 					success : logged,
 					error : failure
 			});

@@ -30,6 +30,7 @@ body {
   width: 50%;
   height: 720px;
   background: url("../ressources/acceuil_bg.gif") no-repeat center;
+  background-size: cover;
   -moz-border-radius:px;
   -webkit-border-radius:px;
   border-radius:px;

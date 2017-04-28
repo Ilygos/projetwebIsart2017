@@ -1,16 +1,17 @@
-define(['jqueryUI'], function($){
+define(['jqueryUI', ''], function(UI){
     var id;
-    function card()
+    
+    function card(type)
     {
-        //id = setInterval(function(){
-        $( ".hand_card" ).draggable({
-          addClasses: false
-        });
-     //});
+      $("#hand").append(display[type]);
+      $(".handCard").draggable({
+        revert: true,
+        revertDuration: 200,
+        containment: "document"
+      });
     }
 
 
 
 		return card;
 });
-console.log("hey");
