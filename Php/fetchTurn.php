@@ -1,7 +1,5 @@
 <?php
-session_start();
 
-include 'connexion.php';
 
 $Data_Raw = $bdd->prepare("SELECT * FROM Deck INNER JOIN Turn ON Deck.ID_Card = Turn.ID_Card");
 $Data_Raw->execute();

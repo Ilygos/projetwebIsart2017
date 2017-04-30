@@ -105,17 +105,20 @@ define(["jquery", "Player", "card"], function($, Player, card){
 			console.log("doFailed :", jqxhr.status, textStatus, error);
 		}
 
-
+    function display()
+    {
+      console.log("Ah.");
+    }
     function meteor()
     {
-      console.log("METEOR FEERIQUE DE PEGASE");
+      console.log("METEORS DE PEGASE");
     }
     function cardPlayed(data)
     {
       if (data == "meteor")
         meteor();
       else if (data == "turnResolved")
-        yolo;
+       display();
       else
         console.log("Revenez Plus Tard !!" + data);
 
@@ -123,7 +126,6 @@ define(["jquery", "Player", "card"], function($, Player, card){
 
     function playCard(card) {
       var idCardPlayed = card.target.className.split(" ").pop();
-      console.log(idCardPlayed);
       var url = "playCard.php?id="+idCardPlayed;
 
 			$.ajax({
