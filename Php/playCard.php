@@ -1,32 +1,45 @@
 <?php
 session_start();
 
-$TYPES = ["High","Low","Mid"];
+$TYPES = array(
+  0 => "high",
+  1 => "low",
+  2 => "middle");
 
-$cardPlayed = $_GET["ID_CardPlayed"];
+$cardPlayed = $_GET["id"];
 
-$Data_Raw = $bdd->prepare("UPDATE `Turn` SET `CardPlayed`=".$cardPlayed." WHERE ID_Player="..";";
+include 'connexion.php';
+
+$Data_Raw = $bdd->prepare("UPDATE `Turn` SET `CardPlayed`=".$cardPlayed." WHERE ID_Player=".$_SESSION["Player"]["ID_Player"].";");
 $Data_Raw->execute();
-$_SESSION["Turn"][$_SESSION["Player"]["ID_Player"]-1]["CardPlayed"];
+
+$Data_Raw = $bdd->prepare("SELECT * FROM Deck INNER JOIN Turn ON Deck.ID_Card = Turn.CardPlayed");
+$Data_Raw->execute();
+$results = $Data_Raw->fetchAll(PDO::FETCH_ASSOC);
+$_SESSION["Turn"] = $results;
 
 
-function checkCards()
+echo checkCards($TYPES);
+
+function checkCards($TYPES)
 {
-    var $p1CardType = $_SESSION["CardPlayed"][0]["Type"];
-    var $p2CardType = $_SESSION["CardPlayed"][1]["Type"];
-    if ( $TYPES.indexOf($p1CardType) == $TYPES.indexOf($p1CardType))
+    if ($_SESSION["Turn"][0]["CardPlayed"] == 0 || $_SESSION["Turn"][1]["CardPlayed"] == 0) return "pleaseWait";
+    $p1CardType = $_SESSION["Turn"][0]["Type"];
+    $p2CardType = $_SESSION["Turn"][1]["Type"];
+    $indexCardP1 = array_search($p1CardType, $TYPES);
+    $indexCardP2 = array_search($p2CardType, $TYPES);
+    if ( $indexCardP1 == $indexCardP2)
       return "meteor";
-    else if($TYPES.indexOf($p1CardType) == 0 && $TYPES.indexOf($p2CardType) == count($TYPES)-1)
-      playerHurt(1);
-    else if($TYPES.indexOf($p2CardType) == 0 && $TYPES.indexOf($p1CardType) == count($TYPES)-1)
-      playerHurt(2);
-    else if($TYPES.indexOf($p1CardType) > $TYPES.indexOf($p2CardType))
-      playerHurt(1);
-    else if ($TYPES.indexOf($p1CardType) < $TYPES.indexOf($p2CardType))
-      playerHurt(2);
+    else if($indexCardP1 == 0 && $indexCardP2 == count($TYPES)-1)
+    $a=1;//  playerHurt(1);
+    else if($indexCardP2 == 0 && $indexCardP1 == count($TYPES)-1)
+$a=1;  //    playerHurt(2);
+    else if($indexCardP1 > $indexCardP2)
+  $a=1;  //  playerHurt(1);
+    else if ($indexCardP1 < $indexCardP2)
+  $a=1;  //  playerHurt(2);
     return "turnResolved";
 }
-
 
 function playerHurt($idPlayer)
 {

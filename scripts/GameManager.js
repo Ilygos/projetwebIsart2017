@@ -1,5 +1,11 @@
-define(["jquery", "Player", "card", "jqueryUI"], function($, Player, card, UI){
-    var id;
+define(["jquery", "Player", "card"], function($, Player, card){
+    const HAND_CARD_CLASS = "handCard";
+    const CARD_DISPLAY = {
+      'high':$('<img src="./ressources/player1_card_slash_high.png"></img>'),
+      'low':$('<img src="./ressources/player1_card_slash_low.png"></img>'),
+      'middle':$('<img src="./ressources/player1_card_slash_middle.png"></img>')
+    //  'guard':''
+    }
 
     GameManager.prototype.display = $(`<div id="container">
       <div id="bra">
@@ -37,17 +43,17 @@ define(["jquery", "Player", "card", "jqueryUI"], function($, Player, card, UI){
                 <img class="logo" src="ressources/logo.png">
             </div>
             <div id="hand">
-                <img class="handCard" src="ressources/cards.png">
-                <img class="handCard" src="ressources/cards.png">
-                <img class="handCard" src="ressources/cards.png">
             </div>
             <div id="deck"></div>
         </div>
     </div>`);
 
+    var id;
+
+
     function GameManager()
     {
-        init();
+      $('#stage').append(this.display);
     }
 
     var remainingDeckCards = 1;
@@ -60,7 +66,7 @@ define(["jquery", "Player", "card", "jqueryUI"], function($, Player, card, UI){
     function renderDeck(){
       var card;
 
-      for (var i = 0; i < remainingDeckCards; i++)
+      for (var i = 0; i < 100; i++)
       {
         var cardX;
         var cardY;
@@ -76,11 +82,82 @@ define(["jquery", "Player", "card", "jqueryUI"], function($, Player, card, UI){
 
 
 
-    function init()
+    GameManager.prototype.init = function()
     {
       player = new Player();
+      sethand();
       renderDeck();
     }
+
+
+    function addCard(type, id)
+    {
+      var lCard = CARD_DISPLAY[type];
+
+      lCard.on('mousedown', playCard);
+      lCard.addClass(HAND_CARD_CLASS + " " + id)
+      $("#hand").append(lCard);
+
+    }
+
+    function failure(jqxhr, textStatus, error)
+		{
+			console.log("doFailed :", jqxhr.status, textStatus, error);
+		}
+
+    function display()
+    {
+      console.log("Ah.");
+    }
+    function meteor()
+    {
+      console.log("METEORS DE PEGASE");
+    }
+    function cardPlayed(data)
+    {
+      if (data == "meteor")
+        meteor();
+      else if (data == "turnResolved")
+       display();
+      else
+        console.log("Revenez Plus Tard !!" + data);
+
+    }
+
+    function playCard(card) {
+      var idCardPlayed = card.target.className.split(" ").pop();
+      var url = "playCard.php?id="+idCardPlayed;
+
+			$.ajax({
+				 url : "./Php/"+url, // url du script à interroger
+					success : cardPlayed,
+					error : failure
+			});
+    }
+
+    function drag(pEvent)
+    {
+      pEvent.target.style.bottom = pEvent.clientY + "px";
+      pEvent.target.style.left = pEvent.clientX + "px";
+    }
+    function drop(pEvent)
+    {
+    //  pEvent.target.style.top = (pEvent.target.style.top - 20) + "px";
+    }
+    /*$(".handCard").draggable({
+      revert: true,
+      revertDuration: 200,
+      containment: "document"
+    });*/
+    function sethand()
+    {
+      var hand = Player.prototype.hand;
+      for (var i = 0; i < Player.prototype.hand.length; i++)
+      {
+        addCard(player.hand[i]["Type"], player.hand[i]["ID_Card"]);
+      }
+    }
+
 
 		return GameManager;
 });

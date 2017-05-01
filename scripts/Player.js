@@ -1,7 +1,8 @@
 
 define(['jquery', 'Turn', 'GameManager'], function($, Turn, GameManager){
 		Player.prototype.id = 0;
-		Player.data = [];
+		Player.prototype.data = [];
+		Player.prototype.gm;
 		var that;
 		var urlPhpFile = './Php/fetchHand.php';
 
@@ -10,14 +11,6 @@ define(['jquery', 'Turn', 'GameManager'], function($, Turn, GameManager){
 			that = this;
 		}
 
-		function Play()
-		{
-			var turn = new Turn();
-		}
-
-
-
-
 		function failure(jqxhr, textStatus, error)
 		{
 			console.log("doFailed :", jqxhr.status, textStatus, error);
@@ -25,13 +18,14 @@ define(['jquery', 'Turn', 'GameManager'], function($, Turn, GameManager){
 
 		function fetchHand(data)
 		{
-			that.hand = data;
-			console.log(that.hand.toString());
+			Player.prototype.hand = data;
+			Player.prototype.gm.init();
 		}
 
 		Player.prototype.getHand = function()
 		{
-			urlPhpFile += "?ID="+that.id;
+			urlPhpFile += "?ID="+Player.prototype.data['ID_Player'];
+
 			$.ajax({
 				url : urlPhpFile,
 	      dataType : 'json',
