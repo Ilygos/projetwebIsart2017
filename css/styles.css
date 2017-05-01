@@ -158,8 +158,7 @@ body {
     bottom:0;
     left :0;
     right :0;
-    /*height: 150px;
-    background-color: blue;*/
+
 }
 
 #hand, #deck{
@@ -216,20 +215,17 @@ body {
     position : absolute;
     left : 0;
     right : 0;
-<<<<<<< HEAD
-    bottom:150px;
-=======
+
     bottom:325px;
->>>>>>> f9ff483c675e3b645771f8f97de1c43ec9952858
-    /*height: 10px;
-    background-color: aqua;*/
+
 }
 #groundLeft, #groundRight {
     position : absolute;
+    /*bottom :150px;*/
     left : 0;
     width : 50%;
 
-   /* background-color: red;*/
+   
 }
 
 #groundRight {
