@@ -287,7 +287,7 @@ body {
 }
 /* ---- PLAYER ANIMATION -------------------------------------------------------------- */
 #player1.idle, #player2.idle{
-  background: url('../ressources/animation/player1_idle.png') left center;
+  background: url('../ressources/animation/player1_Idle.png') left center;
   animation: idle 0.5s steps(7) infinite; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 
@@ -298,15 +298,15 @@ body {
 }
 
 #player1.slash_high{
-	background: url('../ressources/animation/player1_slash_high.png') left center;
+	background: url('../ressources/animation/player1_Slash_High.png') left center;
     animation: slash_high 0.975s steps(15) forwards; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 #player1.slash_middle{
-	background: url('../ressources/animation/player1_slash_middle.png') left center;
+	background: url('../ressources/animation/player1_Slash_Middle.png') left center;
     animation: slash_middle 0.975s steps(15) forwards; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 #player1.slash_low{
-	background: url('../ressources/animation/player1_slash_low.png') left center;
+	background: url('../ressources/animation/player1_Slash_Low.png') left center;
     animation: slash_low 0.975s steps(15) forwards; /* VOUS POUVEZ MODIFIER LA DUREE */
 }
 
@@ -342,7 +342,7 @@ body {
 /*///////////////////////////Animation du player 2///////////////////////////////////////*/
 
 #player2.idle{
-  background: url('../ressources/animation/player2_idle.png') left center;
+  background: url('../ressources/animation/player2_Idle.png') left center;
 }
 
 #player2.slash_high{
