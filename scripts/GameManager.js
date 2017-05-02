@@ -1,4 +1,4 @@
-define(["jquery", "Player", "card"], function($, Player, card){
+define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundFX){
     const HAND_CARD_CLASS = "handCard";
     const CARD_DISPLAY = {
       'high':$('<img src="./ressources/player1_card_slash_high.png"></img>'),
@@ -6,6 +6,7 @@ define(["jquery", "Player", "card"], function($, Player, card){
       'middle':$('<img src="./ressources/player1_card_slash_middle.png"></img>')
     //  'guard':''
     }
+    const TEMPS_METEOR = 5;
 
     GameManager.prototype.display = $(`<div id="container">
       <div id="bra">
@@ -49,8 +50,8 @@ define(["jquery", "Player", "card"], function($, Player, card){
     </div>`);
 
     var id;
-
-
+    var intervalHand;
+    var click;
     function GameManager()
     {
       $('#stage').append(this.display);
@@ -84,6 +85,8 @@ define(["jquery", "Player", "card"], function($, Player, card){
 
     GameManager.prototype.init = function()
     {
+      SoundFX.initSound();
+      SoundFX.playSound("maintheme");
       player = new Player();
       sethand();
       renderDeck();
@@ -92,9 +95,9 @@ define(["jquery", "Player", "card"], function($, Player, card){
 
     function addCard(type, id)
     {
-      var lCard = CARD_DISPLAY[type];
+      var lCard = CARD_DISPLAY[type].clone();
 
-      lCard.on('mousedown', playCard);
+      lCard.on('click', playCard);
       lCard.addClass(HAND_CARD_CLASS + " " + id)
       $("#hand").append(lCard);
 
@@ -105,16 +108,56 @@ define(["jquery", "Player", "card"], function($, Player, card){
 			console.log("doFailed :", jqxhr.status, textStatus, error);
 		}
 
+
+
     function display()
     {
       console.log("Ah.");
+      draw(1);
     }
+
+    function countdown()
+    {
+    }
+
     function meteor()
     {
       console.log("METEORS DE PEGASE");
+      $("#meteor").css({"display": "flex"});
+      countdown = 3;
+      var id = setInterval(function(){
+        $("#countdown").html(countdown);
+        countdown--;
+        if (countdown < 0)
+        {
+          clearInterval(id);
+          $("#countdown").html("Clickez!!");
+          var id2 = setInterval(function(){
+            $(document).off("click");
+            $("#countdown").css({"font-size": "500px"});
+            var id3 = setInterval(function(){
+              clearInterval(id3);
+              $("#countdown").css({"font-size": "200px"});
+              $("#countdown").html("");
+              $("#meteor").css({"display": "none"});
+            },2000);
+            clearInterval(id2);
+          }, 1000*TEMPS_METEOR);
+          click = 0;
+          $(document).on("click", function(){
+            click ++;
+            SoundFX.playSFX("meteor", 0.6);
+            $("#countdown").html(click);
+            $("#countdown").css({"font-size": 200+5*click+"px"});
+          });
+        }
+      }, 1000);
+      draw(1);
     }
     function cardPlayed(data)
     {
+      Player.prototype.refreshHand();
+      SoundFX.playSFX("sword", 0.8);
       if (data == "meteor")
         meteor();
       else if (data == "turnResolved")
@@ -144,20 +187,41 @@ define(["jquery", "Player", "card"], function($, Player, card){
     {
     //  pEvent.target.style.top = (pEvent.target.style.top - 20) + "px";
     }
-    /*$(".handCard").draggable({
-      revert: true,
-      revertDuration: 200,
-      containment: "document"
-    });*/
-    function sethand()
+
+    function renderHand()
     {
-      var hand = Player.prototype.hand;
+      console.log(Player.prototype.hand.length);
+      $("#hand").empty();
       for (var i = 0; i < Player.prototype.hand.length; i++)
       {
-        addCard(player.hand[i]["Type"], player.hand[i]["ID_Card"]);
+        addCard(Player.prototype.hand[i]["Type"], Player.prototype.hand[i]["ID_Card"]);
       }
     }
 
+    function draw(code)
+    {
+      var url = "draw.php?code=" + code;
+      $.ajax({
+				 url : "./Php/"+url, // url du script à interroger
+         dataType:'json',
+					success : renderHand,
+					error : failure
+			});
+    }
+
+    function sethand()
+    {
+      if (Player.prototype.hand.length <= 0) {
+        draw(3);
+      }
+      else draw(0);
+      intervalHand = setInterval(renderHand, 1000);
+    }
+
+    function logout()
+    {
+
+    }
 
 		return GameManager;
 });

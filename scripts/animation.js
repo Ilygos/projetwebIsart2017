@@ -1,3 +1,4 @@
+define(['jquery'], function($){
 const ANIM_IDLE = "idle";
 const ANIM_SLASH_HIGH = "slash_high";
 const ANIM_SLASH_MIDDLE = "slash_middle";
@@ -8,7 +9,6 @@ const ANIM_RUN_END = "runEnd";
 var player1 = $("#player1");
 var player2 = $("#player2");
 var sequenceAnim = [
-                    
                     [ANIM_IDLE, 3]
                    ]; // le chiffre représente le nombre de répétition à faire par anim
 var currentAnim = sequenceAnim[0][0];
@@ -18,7 +18,8 @@ var animIteration = 0; // le nombre de répétition à faire par anim
 function init(){
     
     introSequence();
-
+    $("#player1").addClass("player.ilde");
+    $("#player1").addClass("run_cycle");
     player2.addClass(ANIM_IDLE);
     
 }
@@ -48,9 +49,6 @@ function endIntroSequence(){
     player2.animate({"right":'50%'}, 400, 'easeOutSine', nextAnim);
     
     
-    /*player1.on("webkitAnimationIteration", repeatAnim);
-    player1.on("animationiteration", repeatAnim);*/
-    
   
 }
 
@@ -67,5 +65,12 @@ function nextAnim(){
     currentAnim = sequenceAnim[animIndex][0];
     player1.addClass(currentAnim);
 }
+    
+function animation(){
+    init();
+}    
 
-$(document).ready(init);
+return animation;
+ 
+});    
+    

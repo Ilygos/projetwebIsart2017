@@ -1,15 +1,17 @@
-define(["jquery", "Player", "card", "GameManager" ,"jqueryUI"], function($, Player, card, GameManager, UI){
+define(["jquery", "Player", "card", "GameManager" ,"jqueryUI", "soundfx"], function($, Player, card, GameManager, UI, SoundFX){
   var id;
   var that;
 
-    TitleCard.prototype.display = $(`<img class="logo" src="ressources/logo.png">
-      <div id="formContainer">
+    TitleCard.prototype.display = $(`<img id="logo" src="ressources/logo.png">
+    <div id="container">
+      <div id="window">
       </div>
         <form action="./Php/sendID.php" method="post" id="loginForm">
             Login &nbsp &nbsp&nbsp&nbsp: <input type="text" name="login"><br>
             Password: <input type="text" name="password"><br>
-            <input type="submit" value="Submit">
-        </form>`);
+            <input type="submit" value="Valider">
+        </form>
+        </div>`);
 
     function TitleCard()
     {
@@ -51,6 +53,8 @@ define(["jquery", "Player", "card", "GameManager" ,"jqueryUI"], function($, Play
 
     TitleCard.prototype.init = function()
     {
+      SoundFX.initSound();
+      SoundFX.playSound("uiloop");
       $('#grid').append(that.display);
       $("#loginForm").submit(function(pEvent) {
 				pEvent.preventDefault();

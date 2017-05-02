@@ -8,6 +8,10 @@ html, body{
     height: 100%;
 }
 body {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     font-size: 12px;
     margin:0;
     padding-top: 1%;
@@ -24,11 +28,13 @@ body {
   justify-content: center; /* alignement vertical */
 
 }
-
-#grid #formContainer{
+#grid #logo{
+  width: 350px;
+  height: 120px;
+}
+#grid #window{
   margin: 0 auto;
-  width: 50%;
-  height: 720px;
+  height: 650px;
   background: url("../ressources/acceuil_bg.gif") no-repeat center;
   background-size: cover;
   -moz-border-radius:px;
@@ -36,12 +42,14 @@ body {
   border-radius:px;
   border: 10px outset #656565;
 }
+#grid #container{
+  width: 50%;
+}
 
 #grid form{
   margin: 0 auto;
   font-size: 48px;
   font-family: Yozakura;
-  width: 50%;
   -webkit-border-radius: 0 25px;
   border-radius: 0 25px;
   background: -moz-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%, rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(40,29,29,1) 91%, rgba(17,11,11,1) 100%); /* FF3.6-15 */
@@ -217,11 +225,7 @@ body {
     position : absolute;
     left : 0;
     right : 0;
-<<<<<<< HEAD
-    bottom:150px;
-=======
     bottom:325px;
->>>>>>> f9ff483c675e3b645771f8f97de1c43ec9952858
     /*height: 10px;
     background-color: aqua;*/
 }
@@ -259,6 +263,21 @@ body {
     transform: scaleX(-1);
 }
 
+
+/*//////////////////////////////////////// METEOR ///////////////////////////////////////*/
+
+#meteor{
+  display: none;
+  position: fixed;
+  left: 25%;
+  margin: 0 auto;
+  color: red;
+}
+
+#countdown{
+  font-family: Yozakura;
+  font-size: 200px;
+}
 /* ---- PLAYER ANIMATION -------------------------------------------------------------- */
 #player1.idle, #player2.idle{
   background: url('../ressources/animation/player1_idle.png') left center;

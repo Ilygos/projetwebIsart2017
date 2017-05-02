@@ -4,11 +4,11 @@ define(['jquery', 'Turn', 'GameManager'], function($, Turn, GameManager){
 		Player.prototype.data = [];
 		Player.prototype.gm;
 		var that;
-		var urlPhpFile = './Php/fetchHand.php';
 
 		function Player()
 		{
 			that = this;
+			this.id = setInterval(this.refreshHand, 1000);
 		}
 
 		function failure(jqxhr, textStatus, error)
@@ -24,12 +24,28 @@ define(['jquery', 'Turn', 'GameManager'], function($, Turn, GameManager){
 
 		Player.prototype.getHand = function()
 		{
-			urlPhpFile += "?ID="+Player.prototype.data['ID_Player'];
+			var urlPhpFile = "./Php/fetchHand.php?ID="+Player.prototype.data['ID_Player'];
 
 			$.ajax({
 				url : urlPhpFile,
 	      dataType : 'json',
 				success : fetchHand,
+				error: failure
+			});
+
+		}
+
+		Player.prototype.refreshHand = function()
+		{
+			var urlPhpFile = "./Php/fetchHand.php?ID="+Player.prototype.data['ID_Player'];
+
+			$.ajax({
+				url : urlPhpFile,
+	      dataType : 'json',
+				success : function (data)
+				{
+					Player.prototype.hand = data;
+				},
 				error: failure
 			});
 
