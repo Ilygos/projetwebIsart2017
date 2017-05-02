@@ -8,7 +8,6 @@ define(['jquery', 'Turn', 'GameManager'], function($, Turn, GameManager){
 		function Player()
 		{
 			that = this;
-			this.id = setInterval(this.refreshHand, 1000);
 		}
 
 		function failure(jqxhr, textStatus, error)

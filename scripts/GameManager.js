@@ -1,12 +1,12 @@
-define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundFX){
+define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player, card, SoundFX, Animation){
     const HAND_CARD_CLASS = "handCard";
     const CARD_DISPLAY = {
       'high':$('<img src="./ressources/player1_card_slash_high.png"></img>'),
       'low':$('<img src="./ressources/player1_card_slash_low.png"></img>'),
-      'middle':$('<img src="./ressources/player1_card_slash_middle.png"></img>')
-    //  'guard':''
+      'middle':$('<img src="./ressources/player1_card_slash_middle.png"></img>'),
+      'guard':$('<img src="./ressources/player1_card_guard.png"></img>')
     }
-    const TEMPS_METEOR = 5;
+    const TEMPS_METEOR = 4;
 
     GameManager.prototype.display = $(`<div id="container">
       <div id="bra">
@@ -31,10 +31,10 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
           <div id="gamePlane">
               <div id="ground">
                   <div id="groundLeft">
-                      <div id="player1"><h1 color="#FF0000">yo</h1></div>
+                      <div id="player1"><h1 color="#FF0000"></h1></div>
                   </div>
                   <div id="groundRight">
-                      <div id="player2"><h1 color="#FF0000">yo</h1></div>
+                      <div id="player2"><h1 color="#FF0000"></h1></div>
                   </div>
               </div>
           </div>
@@ -49,6 +49,7 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
         </div>
     </div>`);
 
+    var players;
     var id;
     var intervalHand;
     var click;
@@ -61,6 +62,7 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
     var cardOffsetX = 150;
     var cardOffsetY = 25;
     var player;
+    var anim;
       var behaviorCard;
 
 
@@ -87,11 +89,43 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
     {
       SoundFX.initSound();
       SoundFX.playSound("maintheme");
+      anim = new Animation();
       player = new Player();
+      intervalHand = setInterval(refresh, 500);
       sethand();
       renderDeck();
     }
 
+    function refresh()
+    {
+      Player.prototype.refreshHand();
+      renderHand();
+      checkForTurnResolve();
+      refershPlayerData();
+    }
+
+    function checkForTurnResolve()
+    {
+      $.ajax({
+         url : "./Php/fetchAnimToPlay.php ", // url du script à interroger
+         dataType:'json',
+          success : display,
+          error : failure
+      });
+    }
+
+
+    function refershPlayerData()
+    {
+      $.ajax({
+				 url : "./Php/refreshPlayerData.php ", // url du script à interroger
+         dataType:'json',
+					success : function(data){
+            players = data;
+          },
+					error : failure
+			});
+    }
 
     function addCard(type, id)
     {
@@ -108,16 +142,90 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
 			console.log("doFailed :", jqxhr.status, textStatus, error);
 		}
 
-
-
-    function display()
+    function resetTurn(){
+      $.ajax({
+         url : "./Php/resetTurn.php", // url du script à interroger
+          success: function(){
+          },
+          error : failure
+      });
+    }
+    function HasPlayedAnim()
     {
-      console.log("Ah.");
-      draw(1);
+      $.ajax({
+         url : "./Php/animPlayed.php", // url du script à interroger
+          success: function(){
+          },
+          error : failure
+      });
+    }
+    function display(data)
+    {
+      switch (data["Player1"]) {
+        case "hurt":
+          anim.animHit(1);
+          HasPlayedAnim();
+          break;
+        case "low":
+          anim.animLow(1);
+          HasPlayedAnim();
+          break;
+        case "high":
+          anim.animHigh(1);
+          HasPlayedAnim();
+          break;
+        case "middle":
+          anim.animMiddle(1);
+          HasPlayedAnim();
+          break;
+        case "guard":
+          anim.animGuard(1);
+          HasPlayedAnim();
+          break;
+        case "death":
+          anim.animDeath(1);
+          HasPlayedAnim();
+          break;
+        default:
+          anim.animIdle(1);
+
+      }
+      switch (data["Player2"]) {
+        case "hurt":
+          anim.animHit(2);
+          break;
+        case "low":
+          anim.animLow(2);
+          break;
+        case "high":
+          anim.animHigh(2);
+          break;
+        case "middle":
+          anim.animMiddle(2);
+          break;
+        case "guard":
+          anim.animGuard(2);
+          break;
+        case "death":
+          anim.animDeath(2);
+          break;
+        default:
+          anim.animIdle(2);
+
+      }
+      if (data["Player1"] != 'idle' && data["Player2"] != "idle") var reset = setTimeout(resetTurn, 1250);
     }
 
-    function countdown()
+
+
+    function fetchAnimToPlay()
     {
+      $.ajax({
+				 url : "./Php/fetchAnimToPlay.php", // url du script à interroger
+         dataType:'json',
+					success : display,
+					error : failure
+			});
     }
 
     function meteor()
@@ -134,6 +242,7 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
           $("#countdown").html("Clickez!!");
           var id2 = setInterval(function(){
             $(document).off("click");
+            $("#countdown").html(click);
             $("#countdown").css({"font-size": "500px"});
             var id3 = setInterval(function(){
               clearInterval(id3);
@@ -144,16 +253,18 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
             clearInterval(id2);
           }, 1000*TEMPS_METEOR);
           click = 0;
+          SoundFX.playSFX("meteor", 0.6);
           $(document).on("click", function(){
             click ++;
-            SoundFX.playSFX("meteor", 0.6);
+            anim.animLow(Player.prototype.data["ID_Player"]);
             $("#countdown").html(click);
             $("#countdown").css({"font-size": 200+5*click+"px"});
           });
         }
       }, 1000);
-      draw(1);
     }
+
+
     function cardPlayed(data)
     {
       Player.prototype.refreshHand();
@@ -161,9 +272,10 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
       if (data == "meteor")
         meteor();
       else if (data == "turnResolved")
-       display();
+       fetchAnimToPlay();
       else
         console.log("Revenez Plus Tard !!" + data);
+      draw(1);
 
     }
 
@@ -178,19 +290,8 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
 			});
     }
 
-    function drag(pEvent)
-    {
-      pEvent.target.style.bottom = pEvent.clientY + "px";
-      pEvent.target.style.left = pEvent.clientX + "px";
-    }
-    function drop(pEvent)
-    {
-    //  pEvent.target.style.top = (pEvent.target.style.top - 20) + "px";
-    }
-
     function renderHand()
     {
-      console.log(Player.prototype.hand.length);
       $("#hand").empty();
       for (var i = 0; i < Player.prototype.hand.length; i++)
       {
@@ -215,7 +316,6 @@ define(["jquery", "Player", "card", "soundfx"], function($, Player, card, SoundF
         draw(3);
       }
       else draw(0);
-      intervalHand = setInterval(renderHand, 1000);
     }
 
     function logout()
