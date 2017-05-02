@@ -20,6 +20,14 @@ body {
     overflow:hidden;
 }
 
+#loader{
+  color: aquamarine;
+  text-align: center;
+  align-content: center;
+  vertical-align: middle;
+  justify-content: center; /* alignement vertical */
+}
+
 #grid{
   color: aquamarine;
   text-align: center;

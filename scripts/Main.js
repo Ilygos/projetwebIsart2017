@@ -15,13 +15,13 @@ require.config({
 
 
 
-require(["jquery", "GameManager", "TitleCard" ], function($, GameManager, TitleCard){
+require(["jquery", "GameManager", "loader" ], function($, GameManager, Loader){
 
 
 	function init()
 	{
-		var titleCard = new TitleCard();
-		titleCard.init();
+		var loader = new Loader();
+		loader.init();
 	}
 
 
