@@ -12,28 +12,38 @@ function checkCards($bdd)
     $indexCardP2 = array_search($p2CardType, $TYPES);
     if ($p1CardType == "guard" )
     {
-      guard(1, $bdd);
-      return $animToPlay;
+      guard(1,2, $bdd);
+      return "turnResolved";
     }else if($p2CardType == "guard")
     {
-
+      guard(2,1, $bdd);
+      return "turnResolved";
     }
     if ( $indexCardP1 == $indexCardP2)
       return "meteor";
     else if($indexCardP1 == 0 && $indexCardP2 == count($TYPES)-1)
-      playerHurt(1, $bdd);
+      playerHurt(2, 1, $bdd);
     else if($indexCardP2 == 0 && $indexCardP1 == count($TYPES)-1)
-      playerHurt(2, $bdd);
+      playerHurt(1, 2, $bdd);
     else if($indexCardP1 > $indexCardP2)
-      playerHurt(1, $bdd);
+      playerHurt(2, 1, $bdd);
     else if ($indexCardP1 < $indexCardP2)
-      playerHurt(2, $bdd);
+      playerHurt(1, 2, $bdd);
     return "turnResolved";
 }
 
-function playerHurt($idPlayer, $bdd)
+function guard($idPlayerDef, $idPlayerAtk, $bdd)
 {
-  $query = $bdd->prepare("UPDATE `Players` SET `Life`=".$newLife." WHERE `ID_Player`=".$idPlayer);
+  $soakedDamages = max(0,$_SESSION["Turn"][$idPlayerAtk - 1]["Damages"] - $_SESSION["Turn"][$idPlayerDef - 1]["Damages"]);
+  $newLife = $_SESSION['Players'][$idPlayerDef - 1]["Life"] - $soakedDamages;
+  $query = $bdd->prepare("UPDATE `Players` SET `Life`=".$newLife." WHERE `ID_Player`=".$idPlayerDef);
+  $query->execute();
+}
+
+function playerHurt($idPlayerWin, $idPlayerLoose, $bdd)
+{
+  $newLife = $_SESSION['Players'][$idPlayerLoose - 1]["Life"] - $_SESSION["Turn"][$idPlayerWin - 1]["Damages"];
+  $query = $bdd->prepare("UPDATE `Players` SET `Life`=".$newLife." WHERE `ID_Player`=".$idPlayerLoose);
   $query->execute();
 }
 

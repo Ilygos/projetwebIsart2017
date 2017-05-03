@@ -15,7 +15,7 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
                   <span class="playerName">Masamune</span>
                   <div id="lifeBarPlayer1">
                       <div class="lifeBarMask">
-                          <div class="lifeBar"></div>
+                          <div ID="lifeBar1"></div>
                       </div>
                   </div>
               </div>
@@ -23,7 +23,7 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
                   <span class="playerName">Nemusama</span>
                   <div id="lifeBarPlayer1">
                       <div class="lifeBarMask">
-                          <div class="lifeBar"></div>
+                          <div ID="lifeBar2"></div>
                       </div>
                   </div>
               </div>
@@ -51,7 +51,7 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
 
     var players;
     var id;
-    var intervalHand;
+    var refreshData;
     var click;
     function GameManager()
     {
@@ -92,7 +92,7 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
       SoundFX.playSound("maintheme");
       anim = new Animation();
       player = new Player();
-      intervalHand = setInterval(refresh, 500);
+      refreshData = setInterval(refresh, 500);
       sethand();
       renderDeck();
     }
@@ -122,8 +122,9 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
 				 url : "./Php/refreshPlayerData.php ", // url du script à interroger
          dataType:'json',
 					success : function(data){
+            console.log(data);
             for (var i = 0; i < data.length; i++) {
-              $("#lifeBar"+"Player"+data[i]["ID_Player"] + " .lifeBar").css("width", data[i].Life+"%");
+              $("#lifeBar"+data[i]["ID_Player"]).css("width", data[i].Life+"%");
               $("#lifeBar"+"Player"+data[i]["ID_Player"]).effect("highlight", {color: "red"}, "slow");
             }
           },
