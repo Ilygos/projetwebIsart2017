@@ -63,6 +63,7 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
     var cardOffsetY = 25;
     var player;
     var anim;
+    var hasDrew = false;
       var behaviorCard;
 
 
@@ -121,7 +122,10 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
 				 url : "./Php/refreshPlayerData.php ", // url du script à interroger
          dataType:'json',
 					success : function(data){
-            players = data;
+            for (var i = 0; i < data.length; i++) {
+              $("#lifeBar"+"Player"+data[i]["ID_Player"] + " .lifeBar").css("width", data[i].Life+"%");
+              $("#lifeBar"+"Player"+data[i]["ID_Player"]).effect("highlight", {color: "red"}, "slow");
+            }
           },
 					error : failure
 			});
@@ -131,8 +135,8 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
     {
       var lCard = CARD_DISPLAY[type].clone();
 
-      lCard.on('click', playCard);
       lCard.addClass(HAND_CARD_CLASS + " " + id)
+      lCard.on('click', playCard);
       $("#hand").append(lCard);
 
     }
@@ -152,6 +156,10 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
     }
     function HasPlayedAnim()
     {
+      if (!hasDrew){
+        hasDrew = true;
+        draw(1);
+      }
       $.ajax({
          url : "./Php/animPlayed.php", // url du script à interroger
           success: function(){
@@ -188,6 +196,7 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
           break;
         default:
           anim.animIdle(1);
+          hasDrew = false;
 
       }
       switch (data["Player2"]) {
@@ -271,16 +280,24 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
       SoundFX.playSFX("sword", 0.8);
       if (data == "meteor")
         meteor();
-      else if (data == "turnResolved")
-       fetchAnimToPlay();
+      else if (data == "pleaseWait")
+      {
+        alert("En Attente du joueur2. Vous pouvez revenir plus tard");
+        return;
+      }
+      else if (data =="alreadyPlayed")
+      {
+        alert("Vous avez déjà joué ce tour.");
+        return;
+      }
       else
-        console.log("Revenez Plus Tard !!" + data);
-      draw(1);
+        fetchAnimToPlay();
 
     }
 
     function playCard(card) {
       var idCardPlayed = card.target.className.split(" ").pop();
+
       var url = "playCard.php?id="+idCardPlayed;
 
 			$.ajax({

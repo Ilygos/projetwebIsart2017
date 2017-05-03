@@ -10,6 +10,14 @@ function checkCards($bdd)
     $p2CardType = $_SESSION["Turn"][1]["Type"];
     $indexCardP1 = array_search($p1CardType, $TYPES);
     $indexCardP2 = array_search($p2CardType, $TYPES);
+    if ($p1CardType == "guard" )
+    {
+      guard(1, $bdd);
+      return $animToPlay;
+    }else if($p2CardType == "guard")
+    {
+
+    }
     if ( $indexCardP1 == $indexCardP2)
       return "meteor";
     else if($indexCardP1 == 0 && $indexCardP2 == count($TYPES)-1)
@@ -43,7 +51,12 @@ function checkTurn()
   $p2CardType = $_SESSION["Turn"][1]["Type"];
   $indexCardP1 = array_search($p1CardType, $TYPES);
   $indexCardP2 = array_search($p2CardType, $TYPES);
-
+  if ($p1CardType == "guard" || $p2CardType == "guard")
+  {
+    $animToPlay["Player1"] = $p1CardType;
+    $animToPlay["Player2"] = $p2CardType;
+    return $animToPlay;
+  }
   if ($_SESSION["Turn"][0]["CardPlayed"] == 0 || $_SESSION["Turn"][1]["CardPlayed"] == 0){
     $animToPlay["Player1"] = "idle";
     $animToPlay["Player2"] = "idle";

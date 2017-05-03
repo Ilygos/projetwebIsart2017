@@ -10,7 +10,7 @@ session_start();
     $ID = $ID_Raw->fetchAll(PDO::FETCH_ASSOC);
 
     $_SESSION["Player"] = $ID[0];
-
+    
     $jsonPlayer = json_encode($ID[0]);
     echo $jsonPlayer;
 ?>
