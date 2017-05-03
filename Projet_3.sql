@@ -2,10 +2,10 @@
 -- version 4.4.15.8
 -- https://www.phpmyadmin.net
 --
--- Client :  localhost
--- Généré le :  Mer 26 Avril 2017 à 14:15
--- Version du serveur :  5.6.31
--- Version de PHP :  5.5.38
+-- Host: localhost
+-- Generation Time: May 02, 2017 at 11:04 PM
+-- Server version: 5.6.31
+-- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `Projet`
+-- Database: `Projet`
 --
 CREATE DATABASE IF NOT EXISTS `Projet` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `Projet`;
@@ -25,51 +25,60 @@ USE `Projet`;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Deck`
+-- Table structure for table `Deck`
 --
 
 CREATE TABLE IF NOT EXISTS `Deck` (
   `ID_Card` int(11) NOT NULL,
   `Type` varchar(255) NOT NULL,
   `Damages` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `Deck`
+-- Dumping data for table `Deck`
 --
 
 INSERT INTO `Deck` (`ID_Card`, `Type`, `Damages`) VALUES
-(1, 'Front', 10),
+(1, 'middle', 10),
 (2, 'high', 11),
-(3, 'Left', 10),
-(5, 'Guard', 12),
-(6, 'Front', 42);
+(3, 'low', 10),
+(4, 'high', 50),
+(5, 'middle', 12),
+(6, 'middle', 42),
+(7, 'guard', 10),
+(8, 'guard', 10),
+(9, 'middle', 10),
+(10, 'low', 10);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Hand`
+-- Table structure for table `Hand`
 --
 
 CREATE TABLE IF NOT EXISTS `Hand` (
   `ID_Hand` int(11) NOT NULL,
   `ID_Card` int(11) NOT NULL,
   `ID_Player` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=591 DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `Hand`
+-- Dumping data for table `Hand`
 --
 
 INSERT INTO `Hand` (`ID_Hand`, `ID_Card`, `ID_Player`) VALUES
-(1, 2, 1),
-(2, 3, 1),
-(3, 5, 1);
+(569, 10, 1),
+(579, 7, 1),
+(581, 7, 2),
+(584, 8, 1),
+(587, 5, 2),
+(589, 5, 1),
+(590, 8, 2);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Players`
+-- Table structure for table `Players`
 --
 
 CREATE TABLE IF NOT EXISTS `Players` (
@@ -80,87 +89,82 @@ CREATE TABLE IF NOT EXISTS `Players` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `Players`
+-- Dumping data for table `Players`
 --
 
 INSERT INTO `Players` (`ID_Player`, `Login`, `Password`, `Life`) VALUES
-(1, 'Player1', 'aze', 0),
-(2, 'Mouloud', 'Jesuisbougnoul', 0);
+(1, 'Player1', 'aze', 100),
+(2, 'Player2', 'eza', 100);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Turn`
+-- Table structure for table `Turn`
 --
 
 CREATE TABLE IF NOT EXISTS `Turn` (
   `ID_Turn` int(11) NOT NULL,
   `ID_Player` int(11) NOT NULL,
   `CardPlayed` int(11) NOT NULL,
-  `Meteor` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Meteor` int(11) NOT NULL,
+  `HasPlayedAnim` tinyint(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Index pour les tables exportées
+-- Dumping data for table `Turn`
+--
+
+INSERT INTO `Turn` (`ID_Turn`, `ID_Player`, `CardPlayed`, `Meteor`, `HasPlayedAnim`) VALUES
+(1, 1, 9, -1, 0),
+(2, 2, 9, -1, 1);
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `Deck`
+-- Indexes for table `Deck`
 --
 ALTER TABLE `Deck`
   ADD PRIMARY KEY (`ID_Card`);
 
 --
--- Index pour la table `Hand`
+-- Indexes for table `Hand`
 --
 ALTER TABLE `Hand`
-  ADD PRIMARY KEY (`ID_Hand`),
-  ADD UNIQUE KEY `ID_Card` (`ID_Card`) USING BTREE,
-  ADD UNIQUE KEY `ID_Hand` (`ID_Hand`,`ID_Player`),
-  ADD KEY `ID_Player` (`ID_Player`);
+  ADD PRIMARY KEY (`ID_Hand`);
 
 --
--- Index pour la table `Players`
+-- Indexes for table `Players`
 --
 ALTER TABLE `Players`
   ADD PRIMARY KEY (`ID_Player`);
 
 --
--- Index pour la table `Turn`
+-- Indexes for table `Turn`
 --
 ALTER TABLE `Turn`
   ADD PRIMARY KEY (`ID_Turn`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `Deck`
+-- AUTO_INCREMENT for table `Deck`
 --
 ALTER TABLE `Deck`
-  MODIFY `ID_Card` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `ID_Card` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT pour la table `Hand`
+-- AUTO_INCREMENT for table `Hand`
 --
 ALTER TABLE `Hand`
-  MODIFY `ID_Hand` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `ID_Hand` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=591;
 --
--- AUTO_INCREMENT pour la table `Turn`
+-- AUTO_INCREMENT for table `Turn`
 --
 ALTER TABLE `Turn`
-  MODIFY `ID_Turn` int(11) NOT NULL AUTO_INCREMENT;
---
--- Contraintes pour les tables exportées
---
-
---
--- Contraintes pour la table `Hand`
---
-ALTER TABLE `Hand`
-  ADD CONSTRAINT `hand_ibfk_1` FOREIGN KEY (`ID_Player`) REFERENCES `Players` (`ID_Player`),
-  ADD CONSTRAINT `hand_ibfk_2` FOREIGN KEY (`ID_Card`) REFERENCES `Deck` (`ID_Card`);
-
+  MODIFY `ID_Turn` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
