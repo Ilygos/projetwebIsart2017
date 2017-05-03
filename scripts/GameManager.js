@@ -53,6 +53,7 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
     var id;
     var refreshData;
     var click;
+    var obliterateTheWorldYouAreLivingIn = false;
     function GameManager()
     {
       $('#stage').append(this.display);
@@ -95,14 +96,29 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
       refreshData = setInterval(refresh, 500);
       sethand();
       renderDeck();
+      checkStatus();
+
     }
 
     function refresh()
     {
       Player.prototype.refreshHand();
       renderHand();
-      checkForTurnResolve();
       refershPlayerData();
+    }
+
+    function checkStatus()
+    {
+      $.ajax({
+         url : "./Php/checkStatus.php ", // url du script à interroger
+          success : function (data){
+            if (data == "meteor")
+              meteor();
+            else
+              checkForTurnResolve();
+          },
+          error : failure
+      });
     }
 
     function checkForTurnResolve()
@@ -122,7 +138,6 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
 				 url : "./Php/refreshPlayerData.php ", // url du script à interroger
          dataType:'json',
 					success : function(data){
-            console.log(data);
             for (var i = 0; i < data.length; i++) {
               $("#lifeBar"+data[i]["ID_Player"]).css("width", data[i].Life+"%");
               $("#lifeBar"+"Player"+data[i]["ID_Player"]).effect("highlight", {color: "red"}, "slow");
@@ -240,7 +255,6 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
 
     function meteor()
     {
-      console.log("METEORS DE PEGASE");
       $("#meteor").css({"display": "flex"});
       countdown = 3;
       var id = setInterval(function(){
@@ -272,13 +286,20 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
           });
         }
       }, 1000);
+      $.ajax({
+				 url : "./Php/playMeteor.php?meteor="+click, // url du script à interroger
+					success : function(data){
+            if (data == "VeuillezAttendre") alert("Attente du meteor de l'autre joueur. Vous pouvez revenir plus tard.");
+            else checkForTurnResolve();
+          },
+					error : failure
+			});
     }
 
 
     function cardPlayed(data)
     {
-      Player.prototype.refreshHand();
-      SoundFX.playSFX("sword", 0.8);
+      if (data == "joue")return;
       if (data == "meteor")
         meteor();
       else if (data == "pleaseWait")
@@ -293,11 +314,11 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
       }
       else
         fetchAnimToPlay();
-
     }
 
     function playCard(card) {
       var idCardPlayed = card.target.className.split(" ").pop();
+      SoundFX.playSFX("sword", 0.8);
 
       var url = "playCard.php?id="+idCardPlayed;
 
@@ -334,6 +355,7 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
         draw(3);
       }
       else draw(0);
+
     }
 
     function logout()

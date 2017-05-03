@@ -5,12 +5,14 @@ function checkCards($bdd)
     0 => "high",
     1 => "low",
     2 => "middle");
+    if ($_SESSION["Turn"][$_SESSION["Player"]["ID_Player"]-1]["CardPlayed"] == 0) return "joue";
     if ($_SESSION["Turn"][0]["CardPlayed"] == 0 || $_SESSION["Turn"][1]["CardPlayed"] == 0) return "pleaseWait";
     $p1CardType = $_SESSION["Turn"][0]["Type"];
     $p2CardType = $_SESSION["Turn"][1]["Type"];
     $indexCardP1 = array_search($p1CardType, $TYPES);
     $indexCardP2 = array_search($p2CardType, $TYPES);
-    if ($p1CardType == "guard" )
+    if ($p1CardType == "guard" && $p1CardType == "guard") return "turnResolved";
+    else if ($p1CardType == "guard" )
     {
       guard(1,2, $bdd);
       return "turnResolved";
