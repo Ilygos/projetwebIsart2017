@@ -17,9 +17,35 @@ require.config({
 
 require(["jquery", "GameManager", "loader" ], function($, GameManager, Loader){
 
+	var reset = setInterval(function(){
+		if (obliterateTheWorldYouAreLivingIn){
+			reset();
+			obliterateTheWorldYouAreLivingIn = false;
+		}
+	}, 100);
+	function failure(jqxhr, textStatus, error)
+	{
+		console.log("doFailed :", jqxhr.status, textStatus, error);
+	}
 
+	function reset(){
+		$.ajax({
+			 url : "./Php/reset.php ", // url du script à interroger
+			 dataType:'json',
+				success : function(data){
+					console.log("Obliteration Complete : World Reset");
+				},
+				error : failure
+		});
+		$('#stage').empty();
+		$('#loader').empty();
+		$('#grid').empty();
+		var loader = new Loader();
+		loader.init();
+	}
 	function init()
 	{
+
 		var loader = new Loader();
 		loader.init();
 	}
