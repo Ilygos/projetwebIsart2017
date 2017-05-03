@@ -53,7 +53,6 @@ define(["jquery", "Player", "card", "soundfx", "animation"], function($, Player,
     var id;
     var refreshData;
     var click;
-    var obliterateTheWorldYouAreLivingIn = false;
     function GameManager()
     {
       $('#stage').append(this.display);

@@ -13,25 +13,14 @@ require.config({
     }
 });
 
+var obliterateTheWorldYouAreLivingIn = false;
 
 
 require(["jquery", "GameManager", "loader" ], function($, GameManager, Loader){
 
-	var reset = setInterval(function(){
-		if (obliterateTheWorldYouAreLivingIn){
-			reset();
-			obliterateTheWorldYouAreLivingIn = false;
-		}
-	}, 100);
-	function failure(jqxhr, textStatus, error)
-	{
-		console.log("doFailed :", jqxhr.status, textStatus, error);
-	}
-
 	function reset(){
 		$.ajax({
 			 url : "./Php/reset.php ", // url du script à interroger
-			 dataType:'json',
 				success : function(data){
 					console.log("Obliteration Complete : World Reset");
 				},
@@ -43,6 +32,20 @@ require(["jquery", "GameManager", "loader" ], function($, GameManager, Loader){
 		var loader = new Loader();
 		loader.init();
 	}
+
+	var teraforming = setInterval(function(){
+		if (obliterateTheWorldYouAreLivingIn){
+			clearInterval(teraforming);
+			reset();
+			obliterateTheWorldYouAreLivingIn = false;
+		}
+	}, 100);
+	function failure(jqxhr, textStatus, error)
+	{
+		console.log("doFailed :", jqxhr.status, textStatus, error);
+	}
+
+
 	function init()
 	{
 
